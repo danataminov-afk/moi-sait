@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danat Site - IT World</title>
+    <style>
+        /* --- CSS ПЕРЕМЕННЫЕ И СТИЛИ --- */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --accent-color: #3498db;
+            --card-bg: #ffffff;
+            --header-grad: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .dark-theme {
+            --bg-color: #1a1a2e;
+            --text-color: #e0e0e0;
+            --accent-color: #00d2ff;
+            --card-bg: #16213e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+        }
+
+        header {
+            background: var(--header-grad);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- АНИМАЦИИ --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- КАРТОЧКИ ЯЗЫКОВ --- */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lang-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        /* --- ТАБЛИЦА УНИВЕРОВ --- */
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { background: var(--accent-color); color: white; }
+
+        img {
+            max-width: 150px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        img:hover { transform: scale(1.1); }
+
+        /* КНОПКА ТЕМЫ */
+        #theme-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="theme-btn">🌓 Сменить тему</button>
+
+    <header>
+        <h1>Programist is a Dream Job</h1>
+        <p>Творчество, логика и технологии будущего</p>
+    </header>
+
+    <div class="container">
+        <section class="reveal">
+            <h2>Языки программирования</h2>
+            <div class="lang-grid">
+                <div class="lang-card"><h3>Python</h3><p>Идеален для AI и анализа данных. Простой синтаксис.</p></div>
+                <div class="lang-card"><h3>JavaScript</h3><p>Оживляет сайты. Самый популярный в веб-разработке.</p></div>
+                <div class="lang-card"><h3>Java</h3><p>Мощь и надежность для крупных банковских систем.</p></div>
+                <div class="lang-card"><h3>C++</h3><p>Скорость и контроль. Движки игр и ОС.</p></div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Университеты Казахстана (IT)</h2>
+            <input type="text" id="uniSearch" class="search-box" placeholder="Начните вводить название (например, KBTU)..." onkeyup="searchTable()">
+            <table id="uniTable">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Название</th>
+                        <th>Лого</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>KBTU</td>
+                        <td><img src="KBTU.jpeg" alt="KBTU"></td>
+                        <td>Престижный вуз с британскими стандартами. Сильная база IT.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Astana IT</td>
+                        <td><img src="Aitu.jpeg" alt="AITU"></td>
+                        <td>Самый современный вуз в столице, упор на практику и хакатоны.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>SDU</td>
+                        <td><img src="Sdu.jpeg" alt="SDU"></td>
+                        <td>Сильное сообщество олимпиадников и международная среда.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="reveal">
+            <h2>Почему стоит выбрать IT?</h2>
+            <ul>
+                <li>Высокая зарплата и востребованность</li>
+                <li>Работа из любой точки мира</li>
+                <li>Постоянное интеллектуальное развитие</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        // 1. Переключение темной темы
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // 2. Живой поиск по таблице
+        function searchTable() {
+            let input = document.getElementById('uniSearch').value.toUpperCase();
+            let trs = document.getElementById('uniTable').getElementsByTagName('tr');
+            for (let i = 1; i < trs.length; i++) {
+                let nameColumn = trs[i].getElementsByTagName('td')[1];
+                if (nameColumn) {
+                    let text = nameColumn.textContent || nameColumn.innerText;
+                    trs[i].style.display = text.toUpperCase().indexOf(input) > -1 ? "" : "none";
+                }
+            }
+        }
+
+        // 3. Анимация появления при скролле
+        function reveal() {
+            let reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Запустить один раз при загрузке
+    </script>
+</body>
+</html>
